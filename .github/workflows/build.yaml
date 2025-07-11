@@ -7,9 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      VITE_TEST_SECRET: ${{ secrets.TEST_SECRET }}
     steps:
+      - name: Secret setzen
+        run: echo "VITE_TEST_SECRET=${{ secrets.TEST_SECRET }}" >> $GITHUB_ENV
+        
       - name: 📥 Checkout
         uses: actions/checkout@v3
 
