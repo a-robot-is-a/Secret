@@ -12,8 +12,5 @@ jobs:
       - name: Secret direkt ausgeben (unsicher!)
         run: 
           echo "${{ secrets.SECRET }}"
-    
-      - name: Hello world action
-        with: 
-          super_secret: ${{ secrets.SECRET }}
+  
     
