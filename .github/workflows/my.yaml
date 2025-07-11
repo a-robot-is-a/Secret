@@ -7,10 +7,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Secret direkt ausgeben (unsicher!)
-        run: 
-          echo "${{ secrets.SECRET }}"
-  
+      - name: Secret anzeigen
+        run: echo "${{ secrets.SECRET }}"
+        env:
+          VITE_TEST_SECRET: ${{ secrets.SECRET }}
     
