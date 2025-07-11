@@ -24,6 +24,9 @@ jobs:
       - name: ✅ Dist-Verzeichnis prüfen
         run: ls -la dist/
 
+      - name: Assets lesen
+        run: ls -la dist/assets/
+
       - name: Secret im Code prüfen
         run: grep "VITE_TEST_SECRET" dist/assets/*.js || echo "❌ Secret nicht eingebettet"
 
