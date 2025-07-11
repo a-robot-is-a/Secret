@@ -1,15 +1,25 @@
-name: Test Work Flow
+name: 🚀 Vite-Build & Deploy
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    env:
+      VITE_TEST_SECRET: ${{ secrets.SECRET }}
+
     steps:
-      - name: Secret anzeigen
-        run: echo "${{ secrets.SECRET }}"
-        env:
-          VITE_TEST_SECRET: ${{ secrets.SECRET }}
-    
+      - name: 📥 Repository holen
+        uses: actions/checkout@v3
+
+      - name: 📦 Dependencies installieren
+        run: npm install
+
+      - name: ⚙️ Vite-Build ausführen
+        run: npm run build
+
+      - name: ✅ Dist-Verzeichnis prüfen
+        run: ls -la dist/
