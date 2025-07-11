@@ -15,8 +15,8 @@ jobs:
       - name: 📥 Repository holen
         uses: actions/checkout@v3
 
-      - name: 📦 Dependencies installieren
-        run: npm install
+      #- name: 📦 Dependencies installieren
+       # run: npm install
 
       - name: ⚙️ Vite-Build ausführen
         run: npm run build
