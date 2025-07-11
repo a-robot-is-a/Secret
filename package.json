@@ -1,7 +1,6 @@
 {
-  "name": "Secret test",
+  "name": "secret-test",
   "version": "1.0.0",
-  "description": "Playing with secrets",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
