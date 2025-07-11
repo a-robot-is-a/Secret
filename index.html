@@ -8,7 +8,9 @@
   <h1>Secret-Wert</h1>
   <p id="secret-value">Wird geladen …</p>
 
-    <script type="module" src="./main.js"></script>
-  
+    <script type="module">
+      const secret = import.meta.env.VITE_TEST_SECRET;
+      document.getElementById("secret-value").textContent = secret ?? "Kein Secret verfügbar";
+  </script>  
 </body>
 </html>
