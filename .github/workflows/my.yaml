@@ -1,0 +1,19 @@
+name: Test Work Flow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Secret direkt ausgeben (unsicher!)
+        run: 
+          echo "${{ secrets.SECRET }}"
+    
+      - name: Hello world action
+        with: 
+          super_secret: ${{ secrets.SECRET }}
+    
