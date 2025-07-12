@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Secret-Testseite</title>
-  </head>
-  <body>
-    <h1>Secret-Wert</h1>
-    <p id="secret-value">Wird geladen …</p>
+<head>
+  <meta charset="UTF-8" />
+  <title>PWA mit Passwort</title>
+</head>
+<body>
+  <h1>Secret-Zugang</h1>
+  <div id="login-container">
+    <input type="password" id="pwd-input" placeholder="Passwort eingeben" />
+    <button onclick="holeSecret()">Einloggen</button>
+  </div>
 
-    
-  </body>
+  <p id="secret-value">Noch nichts geladen</p>
+
+  <script>
+    const secretKey = 'meinSecret';
+
+    // Falls Secret schon gespeichert ist → anzeigen
+    const gespeichertesSecret = localStorage.getItem(secretKey);
+    if (gespeichertesSecret) {
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('secret-value').textContent = gespeichertesSecret;
+    }
+
+    function holeSecret() {
+      const pwd = document.getElementById('pwd-input').value;
+      fetch(`https://dein-server.de/get-config.php?pwd=${encodeURIComponent(pwd)}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data[secretKey]) {
+            localStorage.setItem(secretKey, data[secretKey]);
+            document.getElementById('secret-value').textContent = data[secretKey];
+            document.getElementById('login-container').style.display = 'none';
+          } else {
+            alert('Falsches Passwort. Bitte nochmal versuchen.');
+          }
+        })
+        .catch(err => {
+          console.error('Fehler beim Abrufen des Secrets:', err);
+          alert('Fehler beim Zugriff. Siehe Konsole.');
+        });
+    }
+  </script>
+</body>
 </html>
